@@ -19,7 +19,7 @@ const StoreList: React.FC<StoreListProps> = ({ onClose }) => {
           <h2 className="text-xl font-black text-slate-900 tracking-tight">Hệ thống cửa hàng</h2>
         </div>
         <div className="bg-red-50 text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
-          {STORES.length} Store
+          {STORES.length} cửa hàng
         </div>
       </header>
 
