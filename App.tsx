@@ -86,7 +86,7 @@ const App: React.FC = () => {
               onClick={() => setShowOrderHistory(true)}
               className="flex items-center gap-1 sm:gap-1.5 text-[8px] sm:text-[9px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl shrink-0"
             >
-              Lịch sử <History className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
+              Lịch sử mua hàng <History className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-red-500" />
             </button>
           </div>
 
