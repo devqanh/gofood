@@ -21,6 +21,12 @@ const App: React.FC = () => {
 
   const progressPercentage = (MOCK_USER.spending / (MOCK_USER.spending + MOCK_USER.remainingToNextTier)) * 100;
 
+  const tierBenefitsRef = React.useRef<HTMLElement>(null);
+
+  const scrollToTierBenefits = () => {
+    tierBenefitsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setBarWidth(progressPercentage);
@@ -46,12 +52,12 @@ const App: React.FC = () => {
           />
         </div>
         <div className="flex gap-2">
-          <button onClick={() => setShowStoreList(true)} className="w-9 h-9 flex items-center justify-center bg-white rounded-xl shadow-sm border border-slate-100 text-slate-900">
+          <button onClick={() => setShowStoreList(true)} className="w-9 h-9 flex items-center justify-center bg-white rounded-xl shadow-sm border border-slate-100 text-slate-900 hover:bg-slate-50 active:scale-95 transition-all">
             <MapPin className="w-4.5 h-4.5" />
           </button>
-          <button onClick={() => setShowNotifications(true)} className="w-9 h-9 flex items-center justify-center bg-white rounded-xl shadow-sm border border-slate-100 text-slate-400 relative">
+          <button onClick={() => setShowNotifications(true)} className="w-9 h-9 flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-50 rounded-xl shadow-md border border-red-100 text-red-600 relative hover:shadow-lg hover:scale-105 active:scale-95 transition-all">
             <Bell className="w-4.5 h-4.5" />
-            <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-red-600 rounded-full border border-white"></span>
+            <span className="absolute top-2 right-2 w-2 h-2 bg-red-600 rounded-full border-2 border-white animate-pulse shadow-lg"></span>
           </button>
         </div>
       </header>
@@ -116,12 +122,12 @@ const App: React.FC = () => {
         </section>
 
         {/* Tier Benefits */}
-        <section className="space-y-6">
+        <section ref={tierBenefitsRef} className="space-y-6">
           <div className="flex items-center justify-between px-1">
             <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Đặc quyền hội viên</h4>
             <div className="flex bg-slate-100 p-0.5 rounded-lg">
-              <button onClick={() => setActiveTab('benefits')} className={`px-3 py-1 text-[9px] font-black rounded-md ${activeTab === 'benefits' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400'}`}>Ưu đãi</button>
-              <button onClick={() => setActiveTab('maintain')} className={`px-3 py-1 text-[9px] font-black rounded-md ${activeTab === 'maintain' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400'}`}>Duy trì</button>
+              <button onClick={() => { setActiveTab('benefits'); scrollToTierBenefits(); }} className={`px-3 py-1 text-[9px] font-black rounded-md ${activeTab === 'benefits' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400'}`}>Ưu đãi hạng thẻ</button>
+              <button onClick={() => { setActiveTab('maintain'); scrollToTierBenefits(); }} className={`px-3 py-1 text-[9px] font-black rounded-md ${activeTab === 'maintain' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400'}`}>Duy trì hạng thẻ</button>
             </div>
           </div>
 
