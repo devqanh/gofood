@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { X, Copy, ChevronRight, Zap, Wallet, CreditCard, Scan, CheckCircle2 } from 'lucide-react';
+import { X, Copy, ChevronRight, Zap, Wallet, CheckCircle2 } from 'lucide-react';
 import { Voucher } from './VoucherList';
 import { MOCK_USER } from '../constants';
 
@@ -11,6 +11,8 @@ interface VoucherDetailProps {
 
 const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
   const [copied, setCopied] = useState(false);
+  const [qrLoaded, setQrLoaded] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(voucher.code);
@@ -59,21 +61,39 @@ const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
               </div>
 
               <div className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+                {/* Loading Skeleton */}
+                {!qrLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-50 rounded-xl">
+                    <div className="w-full h-full bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 animate-pulse rounded-xl flex items-center justify-center">
+                      <div className="w-16 h-16 border-4 border-slate-200 border-t-slate-400 rounded-full animate-spin"></div>
+                    </div>
+                  </div>
+                )}
+
                 <img
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${voucher.code}&margin=1`}
                   alt="QR"
-                  className="w-full h-full"
+                  className={`w-full h-full transition-opacity duration-500 ${qrLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  onLoad={() => setQrLoaded(true)}
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
+
+                <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${qrLoaded ? 'opacity-100' : 'opacity-0'}`}>
                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-2xl p-2 shadow-lg border-2 border-slate-100 flex items-center justify-center">
-                      <img src="https://gofood.vn/images/logo.png" alt="logo" className="w-full h-full object-contain" />
+                      {!logoLoaded && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-slate-100 rounded-2xl">
+                          <div className="w-4 h-4 border-2 border-slate-300 border-t-slate-500 rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                      <img
+                        src="https://gofood.vn/images/logo.png"
+                        alt="logo"
+                        className={`w-full h-full object-contain transition-opacity duration-300 ${logoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        onLoad={() => setLogoLoaded(true)}
+                      />
                    </div>
                 </div>
               </div>
             </div>
-
-            <p className="text-[9px] text-slate-400 font-bold mb-6 tracking-widest uppercase text-center">Tự động cập nhật sau mỗi 2 phút</p>
-
             {/* Coupon Code Box */}
             <div className="w-full space-y-2 mb-8">
                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Mã Coupon</p>
@@ -124,23 +144,26 @@ const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
         </div>
       </div>
 
-      {/* Bottom Control Bar - Optimized for Safe Area */}
-      <footer 
-        className="px-6 pb-6 pt-4 flex items-center justify-around"
+      {/* Bottom Info Section - Optimized for Safe Area */}
+      <footer
+        className="px-5 sm:px-6 pb-6 pt-4"
         style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 20px)' }}
       >
-        <button className="flex flex-col items-center gap-1.5 opacity-60">
-           <Scan className="w-6 h-6 text-white" />
-           <span className="text-[9px] font-black text-white uppercase">Quét mã</span>
-        </button>
-        <button className="flex flex-col items-center gap-1.5">
-           <CreditCard className="w-6 h-6 text-white" />
-           <span className="text-[9px] font-black text-white uppercase">Dùng thẻ</span>
-        </button>
-        <button className="bg-white/20 hover:bg-white/30 backdrop-blur-2xl border border-white/20 px-8 py-3 rounded-full flex items-center gap-2 shadow-lg">
-           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-           <span className="text-[10px] font-black text-white uppercase tracking-widest">Thanh toán</span>
-        </button>
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-4 sm:px-5 py-4 sm:py-5">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 mt-0.5">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1 space-y-2">
+              <h3 className="text-white font-black text-[10px] sm:text-[11px] uppercase tracking-wider">Lưu ý</h3>
+              <p className="text-white/90 text-[9px] sm:text-[10px] leading-relaxed font-medium">
+                Thông tin mã này áp dụng được qua các đơn hàng online và tại cửa hàng. Vui lòng gửi mã này cho nhân viên khi thanh toán.
+              </p>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

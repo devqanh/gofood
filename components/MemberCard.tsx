@@ -62,7 +62,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ name, phone, tier, isUserCurren
         </div>
 
         {/* Footer Section - Optimized for iPhone */}
-        <div className="flex items-start justify-between border-t border-white/10 pt-1.5 sm:pt-2.5 gap-2 flex-shrink-0">
+        <div className="flex items-center justify-between border-t border-white/10 pt-1.5 sm:pt-2.5 gap-2 flex-shrink-0">
           <div className="flex flex-col gap-0.5">
             <span className={`${textColor} text-[8px] sm:text-[10px] font-black tracking-[0.06em] sm:tracking-[0.1em] uppercase opacity-90 leading-[1.3]`}>
               {config.displayName}
@@ -75,7 +75,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ name, phone, tier, isUserCurren
             )}
           </div>
 
-          <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg border ${glassEffect} flex items-center justify-center shrink-0 self-start`}>
+          <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg border ${glassEffect} flex items-center justify-center shrink-0`}>
             <ShieldCheck className={`${textColor} w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-90`} />
           </div>
         </div>
