@@ -23,8 +23,8 @@ const StoreList: React.FC<StoreListProps> = ({ onClose }) => {
             Hệ thống cửa hàng
           </h2>
         </div>
-        <div className="bg-red-600 text-white px-3 py-1.5 rounded-full shadow-sm">
-          <span className="text-[10px] font-bold tracking-wide">{STORES.length} CỬA HÀNG</span>
+        <div className="bg-red-600 text-white px-3 py-1.5 rounded-full shadow-sm flex items-center justify-center">
+          <span className="text-[10px] font-bold tracking-wide leading-none">{STORES.length} CỬA HÀNG</span>
         </div>
       </header>
 
