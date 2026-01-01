@@ -12,7 +12,7 @@ const TierSelector: React.FC<TierSelectorProps> = ({ activeTier, onSelect }) => 
   const tiers = Object.values(TierType);
 
   return (
-    <div className="grid grid-cols-5 gap-3 py-6 px-1">
+    <div className="grid grid-cols-5 gap-3 py-3 px-1">
       {tiers.map((tier) => {
         const isActive = activeTier === tier;
         const config = (TIER_CONFIG as any)[tier];
