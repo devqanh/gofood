@@ -62,7 +62,7 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({ onClose }) => {
       </header>
 
       {/* Summary Stat */}
-      <div className="px-6 py-6 bg-white/50 border-b border-slate-50">
+      <div className="px-6 py-5 bg-white/50 border-b border-slate-50">
         <div className="bg-slate-900 rounded-3xl p-6 flex justify-between items-center shadow-xl shadow-slate-900/10">
           <div className="space-y-1">
             <p className="text-white/40 text-[9px] font-black uppercase tracking-widest">Tổng chi tiêu (T5)</p>
@@ -77,7 +77,7 @@ const OrderHistory: React.FC<OrderHistoryProps> = ({ onClose }) => {
       </div>
 
       {/* List */}
-      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4 hide-scrollbar">
+      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-3 hide-scrollbar">
         {MOCK_ORDERS.map((order) => (
           <div 
             key={order.id}
