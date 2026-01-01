@@ -3,23 +3,25 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Gofood Loyalty Elite</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --safe-top: env(safe-area-inset-top);
+        --safe-bottom: env(safe-area-inset-bottom);
+      }
       body {
         font-family: 'Inter', sans-serif;
         background-color: #f8fafc;
+        padding-top: var(--safe-top);
       }
       .glass-card {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .premium-shadow {
-        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
       }
       .hide-scrollbar::-webkit-scrollbar {
         display: none;
@@ -28,10 +30,12 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
-      @keyframes shimmer {
-        0% { left: -100%; }
-        50% { left: 100%; }
-        100% { left: 100%; }
+      @keyframes glassSweep {
+        0% { left: -100%; opacity: 0; }
+        10% { opacity: 1; }
+        40% { left: 150%; opacity: 1; }
+        41% { opacity: 0; }
+        100% { left: 150%; opacity: 0; }
       }
     </style>
   <script type="importmap">
