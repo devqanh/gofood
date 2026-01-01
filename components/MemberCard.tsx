@@ -50,8 +50,8 @@ const MemberCard: React.FC<MemberCardProps> = ({ name, phone, tier, isUserCurren
         </div>
 
         {/* Identity Section */}
-        <div className="flex-1 flex flex-col justify-end pb-1 sm:pb-2">
-          <div className="space-y-0.5">
+        <div className="flex-1 flex flex-col justify-end">
+          <div className="space-y-0.5 pb-1 sm:pb-2">
             <h2 className={`${textColor} text-sm sm:text-lg md:text-xl font-bold tracking-tight leading-tight`}>
               {name}
             </h2>
@@ -62,7 +62,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ name, phone, tier, isUserCurren
         </div>
 
         {/* Footer Section - Optimized for iPhone */}
-        <div className="flex justify-between items-start border-t border-white/10 pt-1.5 sm:pt-2.5 gap-2 flex-shrink-0">
+        <div className="flex items-start justify-between border-t border-white/10 pt-1.5 sm:pt-2.5 gap-2 flex-shrink-0">
           <div className="flex flex-col gap-0.5">
             <span className={`${textColor} text-[8px] sm:text-[10px] font-black tracking-[0.06em] sm:tracking-[0.1em] uppercase opacity-90 leading-[1.3]`}>
               {config.displayName}
@@ -70,12 +70,12 @@ const MemberCard: React.FC<MemberCardProps> = ({ name, phone, tier, isUserCurren
             {isUserCurrentTier && (
               <div className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-green-500/20 border border-green-500/10 w-fit">
                 <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-green-400 animate-pulse"></div>
-                <span className="text-green-400 text-[6px] sm:text-[8px] font-black uppercase leading-[1.3]">Hạng hiện tại</span>
+                <span className="text-green-400 text-[5px] sm:text-[8px] font-black uppercase leading-[1.3]">Hạng hiện tại</span>
               </div>
             )}
           </div>
 
-          <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg border ${glassEffect} flex items-center justify-center shrink-0`}>
+          <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg border ${glassEffect} flex items-center justify-center shrink-0 self-start`}>
             <ShieldCheck className={`${textColor} w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-90`} />
           </div>
         </div>

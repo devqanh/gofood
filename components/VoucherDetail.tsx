@@ -59,14 +59,14 @@ const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
               </div>
 
               <div className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
-                <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${voucher.code}`}
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${voucher.code}&margin=1`}
                   alt="QR"
                   className="w-full h-full"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                   <div className="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-xl p-1 shadow-md border border-slate-50">
-                      <img src="https://gofood.vn/images/logo.png" alt="logo" className="w-full h-auto" />
+                   <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-2xl p-2 shadow-lg border-2 border-slate-100 flex items-center justify-center">
+                      <img src="https://gofood.vn/images/logo.png" alt="logo" className="w-full h-full object-contain" />
                    </div>
                 </div>
               </div>
