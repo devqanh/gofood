@@ -32,9 +32,9 @@ const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
         </button>
       </header>
 
-      <div className="flex-1 px-5 py-2 overflow-y-auto hide-scrollbar flex flex-col items-center">
+      <div className="flex-1 px-5 py-2 overflow-y-auto hide-scrollbar flex flex-col items-center pb-8">
         {/* Main Card Container */}
-        <div className="w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col max-w-[360px] mb-6">
+        <div className="w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col max-w-[360px] mb-4">
           
           {/* Top Promo Banner */}
           <div className="bg-gradient-to-r from-blue-500 to-blue-400 px-5 py-3.5 flex items-center gap-3">
@@ -51,16 +51,16 @@ const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
           </div>
 
           {/* Content Section */}
-          <div className="flex-1 p-7 sm:p-8 flex flex-col items-center">
-            
+          <div className="flex-1 p-5 sm:p-8 flex flex-col items-center">
+
             {/* QR Code with Enhanced "Vệt Sáng" Effect */}
-            <div className="relative p-6 sm:p-7 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm mb-4 overflow-hidden group">
+            <div className="relative p-5 sm:p-7 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm mb-3 overflow-hidden group">
               {/* Sharp Glass Sweep Layer - Clearly visible sweep */}
               <div className="absolute inset-0 z-20 pointer-events-none">
                 <div className="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/80 to-transparent -skew-x-[25deg] animate-[glassSweep_3.5s_infinite_ease-in-out]"></div>
               </div>
 
-              <div className="relative z-10 w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+              <div className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
                 {/* Loading Skeleton */}
                 {!qrLoaded && (
                   <div className="absolute inset-0 flex items-center justify-center bg-slate-50 rounded-xl">
@@ -95,23 +95,30 @@ const VoucherDetail: React.FC<VoucherDetailProps> = ({ voucher, onClose }) => {
               </div>
             </div>
             {/* Coupon Code Box */}
-            <div className="w-full space-y-2 mb-8">
+            <div className="w-full space-y-2 mb-4">
                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Mã Coupon</p>
                <div className="flex items-stretch gap-2 bg-slate-50 rounded-2xl p-1.5 border border-slate-100">
                   <div className="flex-1 flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-xl px-4 py-3">
                     <span className="text-lg font-black text-slate-900 tracking-[0.15em]">{voucher.code}</span>
                   </div>
-                  <button 
+                  <button
                     onClick={copyToClipboard}
-                    className={`px-4 rounded-xl flex items-center justify-center transition-all active:scale-95 ${copied ? 'bg-green-500 text-white' : 'bg-slate-900 text-white'}`}
+                    className={`px-4 rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 ${copied ? 'bg-green-500 text-white' : 'bg-slate-900 text-white'}`}
                   >
-                    {copied ? <CheckCircle2 className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                    {copied ? (
+                      <>
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span className="text-[10px] font-bold whitespace-nowrap">Đã copy!</span>
+                      </>
+                    ) : (
+                      <Copy className="w-5 h-5" />
+                    )}
                   </button>
                </div>
             </div>
 
             {/* Stats Section */}
-            <div className="w-full grid grid-cols-2 border-t border-dashed border-slate-100 pt-6">
+            <div className="w-full grid grid-cols-2 border-t border-dashed border-slate-100 pt-4">
               <div className="flex items-center gap-3 pr-4 border-r border-slate-50">
                 <div className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 font-black text-[10px]">V</div>
                 <div>
