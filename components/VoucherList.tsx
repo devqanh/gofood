@@ -41,7 +41,7 @@ const VoucherList: React.FC<VoucherListProps> = ({ onClose }) => {
       )}
 
       {/* Header */}
-      <header className="px-6 pt-10 pb-6 flex items-center gap-4 bg-white border-b border-slate-100 sticky top-0 z-10 shadow-sm">
+      <header className="px-6 py-4 flex items-center gap-4 bg-white border-b border-slate-100 sticky top-0 z-10 shadow-sm">
         <button onClick={onClose} className="p-2.5 bg-slate-50 rounded-xl hover:bg-slate-100 transition-all active:scale-90">
           <ArrowLeft className="w-5 h-5 text-slate-900" />
         </button>
