@@ -9,6 +9,8 @@ import StoreList from './components/StoreList';
 import VoucherList from './components/VoucherList';
 import NotificationList from './components/NotificationList';
 import OrderHistory from './components/OrderHistory';
+import BenefitDetail, { Benefit } from './components/BenefitDetail';
+import { BENEFIT_DETAILS } from './benefitData';
 
 const App: React.FC = () => {
   const [selectedTier, setSelectedTier] = useState<TierType>(MOCK_USER.currentTier);
@@ -18,6 +20,7 @@ const App: React.FC = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showOrderHistory, setShowOrderHistory] = useState(false);
   const [barWidth, setBarWidth] = useState(0);
+  const [selectedBenefit, setSelectedBenefit] = useState<Benefit | null>(null);
 
   const progressPercentage = (MOCK_USER.spending / (MOCK_USER.spending + MOCK_USER.remainingToNextTier)) * 100;
 
@@ -134,28 +137,46 @@ const App: React.FC = () => {
           <TierSelector activeTier={selectedTier} onSelect={setSelectedTier} />
 
           <div className="space-y-3">
-            {TIER_CONFIG[selectedTier].benefits.map((benefit) => (
-              <div key={benefit.id} className="group flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-50 shadow-sm">
-                <div className="w-10 h-10 shrink-0 rounded-xl bg-slate-50 flex items-center justify-center text-red-600">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-bold text-slate-900 text-sm">{benefit.title}</h4>
-                  <p className="text-[10px] text-slate-400 font-medium">{benefit.description}</p>
-                </div>
-                <ChevronRight className="w-4 h-4 text-slate-300" />
-              </div>
-            ))}
+            {TIER_CONFIG[selectedTier].benefits.map((benefit) => {
+              // Map TierType enum to benefit key prefix
+              const tierKeyMap: Record<TierType, string> = {
+                [TierType.MEMBER]: 'member',
+                [TierType.SILVER]: 'silver',
+                [TierType.GOLD]: 'gold',
+                [TierType.PLATINUM]: 'platinum',
+                [TierType.DIAMOND]: 'diamond'
+              };
+
+              const benefitKey = `${tierKeyMap[selectedTier]}-${benefit.id}`;
+              const benefitDetail = BENEFIT_DETAILS[benefitKey];
+
+              return (
+                <button
+                  key={benefit.id}
+                  onClick={() => benefitDetail && setSelectedBenefit(benefitDetail)}
+                  className="group flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-50 shadow-sm hover:shadow-md hover:border-slate-200 transition-all active:scale-[0.98] w-full text-left"
+                >
+                  <div className="w-10 h-10 shrink-0 rounded-xl bg-slate-50 flex items-center justify-center text-red-600 group-hover:bg-red-50 transition-colors">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-slate-900 text-sm">{benefit.title}</h4>
+                    <p className="text-[10px] text-slate-400 font-medium">{benefit.description}</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-600 transition-colors" />
+                </button>
+              );
+            })}
           </div>
         </section>
       </main>
 
       {/* Fixed Bottom Action - Optimized for Home Indicator */}
-      <div 
+      <div
         className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 pb-4 pt-4 bg-gradient-to-t from-[#F8F9FB] via-[#F8F9FB]/95 to-transparent z-40"
         style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
       >
-        <button 
+        <button
           onClick={() => setShowVoucherList(true)}
           className="w-full bg-red-600 text-white font-black h-12 rounded-xl shadow-xl shadow-red-600/20 flex items-center justify-center gap-2 active:scale-95 transition-all"
         >
@@ -163,6 +184,14 @@ const App: React.FC = () => {
           <span className="text-[11px] uppercase tracking-widest">Khám phá Voucher</span>
         </button>
       </div>
+
+      {/* Modals */}
+      {selectedBenefit && (
+        <BenefitDetail
+          benefit={selectedBenefit}
+          onClose={() => setSelectedBenefit(null)}
+        />
+      )}
     </div>
   );
 };
