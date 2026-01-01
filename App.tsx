@@ -174,7 +174,7 @@ const App: React.FC = () => {
       {/* Fixed Bottom Action - Optimized for Home Indicator */}
       <div
         className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 pb-4 pt-4 bg-gradient-to-t from-[#F8F9FB] via-[#F8F9FB]/95 to-transparent z-40"
-        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 24px)' }}
+        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 10px)' }}
       >
         <button
           onClick={() => setShowVoucherList(true)}
